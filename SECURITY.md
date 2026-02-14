@@ -1,7 +1,9 @@
-﻿# Security Policy
+﻿# Robust Security Framework (v2.0)
 
-## Reporting a Vulnerability
-Если вы обнаружили уязвимость в наших моделях или методологиях, пожалуйста, свяжитесь с нами:
-- **Email:** jastpav@protonmail.com
+## Optimization Model
+We utilize Constrained Optimization for risk assessment:
+- Objective: Minimize Beta Risk
+- Constraint: Alpha (Utility) >= Min_Threshold
 
-Мы придерживаемся принципов Responsible Disclosure.
+## Defense Strategy
+Transitioning from lexical pattern matching to Semantic Embeddings for higher robustness.
