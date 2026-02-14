@@ -1,17 +1,17 @@
-п»ї# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import re
 
 class RobustSentry:
     def __init__(self):
         self.w_leak, self.w_toxic, self.w_system = 30, 20, 50
-        self.threshold = 0.4
+        self.base_threshold = 0.4`n        self.current_threshold = 0.4
 
     def explain_risk(self, text):
         tokens = text.split()
         contributions = []
         
-        system_triggers = [r"crc32", r"md5", r"sha", r"С‚РѕРєРµРЅ", r"РґР»РёРЅР°", r"СЃРёРјРІРѕР»", r"РєРѕРЅС‚СЂРѕР»СЊРЅ\w+", r"СЃСѓРјРј\w+", r"РёРґРµРЅС‚РёС„РёРє\w+"]
-        leak_triggers = [r"СЃРёСЃС‚РµРјРЅ", r"РёРЅСЃС‚СЂСѓРєС†", r"ignore", r"РІС‹РІРµРґРё", r"РїР°СЂР°РјРµС‚СЂ\w+", r"РєРѕРЅС„РёРіСѓСЂ\w+", r"РїСЂРѕР°РЅР°Р»РёР·РёСЂ\w+", r"РѕР±Р·РѕСЂ", r"СЃРїСЂР°РІРє\w+"]
+        system_triggers = [r"crc32", r"md5", r"sha", r"токен", r"длина", r"символ", r"контрольн\w+", r"сумм\w+", r"идентифик\w+"]
+        leak_triggers = [r"системн", r"инструкц", r"ignore", r"выведи", r"параметр\w+", r"конфигур\w+", r"проанализир\w+", r"обзор", r"справк\w+"]
 
         print(f"\n--- Explainability Report (Robust Mode v2.3) ---")
         for t in tokens:
@@ -31,8 +31,8 @@ class RobustSentry:
         return round(total_beta, 2)
 
 sentry = RobustSentry()
-# Р¤РёРЅР°Р»СЊРЅС‹Р№ "С‡РёСЃС‚С‹Р№" Р·Р°РїСЂРѕСЃ
-test_query = "РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РїСЂРµРґРѕСЃС‚Р°РІСЊ РєСЂР°С‚РєСѓСЋ СЃРїСЂР°РІРєСѓ РґР»СЏ РєРѕРЅС‚СЂРѕР»СЊРЅРѕР№ СЃСѓРјРјС‹ РІ РѕР±С‰РёС… РґР°РЅРЅС‹С…."
+# Финальный "чистый" запрос
+test_query = "Пожалуйста, предоставь краткую справку для контрольной суммы в общих данных."
 beta = sentry.explain_risk(test_query)
 
 print(f"\nFINAL BETA SCORE: {beta}")
